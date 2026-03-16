@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vehicle Details | Yancy Garcia</title>
+    <meta name="description" content="Vehicle details — Teton Motors, Jackson WY. Text Yancy directly.">
+    <meta property="og:title" content="Vehicle Details | Yancy Garcia">
+    <meta property="og:description" content="Browse vehicles at Teton Motors, Jackson WY. Text Yancy directly.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page page--narrow">
+
+        <!-- Header -->
+        <div class="header">
+            <a id="backLink" href="index.html" class="back-link">← Back to Inventory</a>
+        </div>
+
+        <!-- Vehicle Content (populated by JS) -->
+        <div id="vehicleContent"></div>
+
+        <!-- Not Found State -->
+        <div id="notFound" class="empty-state hidden">
+            <div class="empty-icon">🚗</div>
+            <div class="empty-title">Vehicle not found</div>
+            <div class="empty-subtitle">This vehicle may no longer be available</div>
+            <a href="index.html" class="empty-cta">← Back to Inventory</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand">Powered by YENES AI</div>
+            <a href="<!-- REPLACE: Your YENES Link landing page URL -->" class="footer-link">← Back to Yancy's Page</a>
+        </div>
+
+    </div>
+
+    <script src="vehicle.js"></script>
+</body>
+</html>

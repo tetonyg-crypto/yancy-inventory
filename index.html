@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yancy Garcia | Vehicle Inventory | Teton Motors</title>
+    <meta name="description" content="Browse vehicles at Stone's Auto Group & Teton Motors. Trucks, SUVs, sedans. Text Yancy directly. Hablo Español.">
+    <meta property="og:title" content="Yancy Garcia | Vehicle Inventory | Teton Motors">
+    <meta property="og:description" content="Browse 60+ vehicles at Teton Motors, Jackson WY. Trucks, SUVs, sedans. Text Yancy directly.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page page--wide">
+
+        <!-- Header -->
+        <div class="header">
+            <a href="https://yancy-link.vercel.app" class="back-link">← Back</a>
+            <div class="header-center">
+                <div class="header-title">Available Vehicles</div>
+                <div class="header-subtitle">Stone's Auto Group · Teton Motors</div>
+            </div>
+            <div class="vehicle-count" id="vehicleCount">0</div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="search" id="searchInput" placeholder="🔍 Search make, model, or keyword..." class="search-input">
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <button class="filter-chip active" data-filter="body" data-value="all">All</button>
+                <button class="filter-chip" data-filter="body" data-value="Truck">Truck</button>
+                <button class="filter-chip" data-filter="body" data-value="SUV">SUV</button>
+                <button class="filter-chip" data-filter="body" data-value="Sedan">Sedan</button>
+                <button class="filter-chip" data-filter="body" data-value="Van">Van</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-chip active" data-filter="price" data-value="all">All</button>
+                <button class="filter-chip" data-filter="price" data-value="under20k">Under $20K</button>
+                <button class="filter-chip" data-filter="price" data-value="20to35">$20K–$35K</button>
+                <button class="filter-chip" data-filter="price" data-value="35to50">$35K–$50K</button>
+                <button class="filter-chip" data-filter="price" data-value="over50">$50K+</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-chip active" data-filter="condition" data-value="all">All</button>
+                <button class="filter-chip" data-filter="condition" data-value="New">New</button>
+                <button class="filter-chip" data-filter="condition" data-value="Used">Used</button>
+            </div>
+            <div class="filter-group" id="makeFilters"></div>
+        </div>
+
+        <!-- Sort Bar -->
+        <div class="sort-bar">
+            <span class="results-count" id="resultsCount">0 vehicles</span>
+            <select id="sortSelect" class="sort-select">
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="year-desc">Newest First</option>
+                <option value="miles-asc">Lowest Mileage</option>
+            </select>
+        </div>
+
+        <!-- Vehicle Grid -->
+        <div class="vehicle-grid" id="vehicleGrid"></div>
+
+        <!-- Empty State -->
+        <div class="empty-state hidden" id="emptyState">
+            <div class="empty-icon">🔍</div>
+            <div class="empty-title">No vehicles match your filters</div>
+            <div class="empty-subtitle">Try adjusting your search or clearing filters</div>
+            <a href="sms:3076993743?body=Hey%20Yancy%2C%20I%27m%20looking%20for%20something%20specific" class="empty-cta">💬 Text Me — I Can Find What You're Looking For</a>
+            <button class="empty-clear" id="clearFilters">Clear All Filters</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand">Powered by YENES AI</div>
+            <a href="<!-- REPLACE: Your YENES Link landing page URL -->" class="footer-link">← Back to Yancy's Page</a>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

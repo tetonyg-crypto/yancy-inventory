@@ -1,0 +1,12 @@
+{
+    "name": "yancy-inventory-scraper",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "scrape": "node scrape.js"
+    },
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.12",
+        "node-fetch": "^3.3.2"
+    }
+}
