@@ -33,7 +33,8 @@ async function loadInventory() {
     try {
         const res = await fetch(INVENTORY_URL);
         const data = await res.json();
-        allVehicles = data;
+        // Only show published vehicles on the public site
+        allVehicles = data.filter(v => v.published !== false);
         buildMakeFilters();
         applyFilters();
         const countEl = document.getElementById('vehicleCount');

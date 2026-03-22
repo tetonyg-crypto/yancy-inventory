@@ -1,12 +1,13 @@
 {
     "name": "yancy-inventory-scraper",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "private": true,
     "scripts": {
-        "scrape": "node scrape.js"
+        "sync": "node sync.js",
+        "sync:push": "node sync.js --push",
+        "admin": "node ../admin/server.js"
     },
     "dependencies": {
-        "cheerio": "^1.0.0-rc.12",
-        "node-fetch": "^3.3.2"
+        "puppeteer": "^22.0.0"
     }
 }
