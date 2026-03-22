@@ -10,7 +10,9 @@
  *   - 2026-03-22: Initial creation — Puppeteer-based multi-dealer scraper
  */
 
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
@@ -38,7 +40,7 @@ const DEALERS = [
         platform: 'dealereprocess',
         defaultCondition: 'Used',
         maxPages: 15,
-        needsHomepage: false
+        needsHomepage: true
     },
     {
         name: "Teton Motors GM",
@@ -131,8 +133,11 @@ async function scrapeDealerEprocess(browser, config) {
         // Visit homepage first if needed (stonessubaru 403 fix)
         if (config.needsHomepage) {
             log(`Visiting homepage: ${config.baseUrl}`);
-            await page.goto(config.baseUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-            await new Promise(r => setTimeout(r, 2000));
+            await page.goto(config.baseUrl, { waitUntil: 'networkidle2', timeout: 30000 });
+            await new Promise(r => setTimeout(r, 4000));
+            // Click through any cookie/popup banners
+            try { await page.click('[class*="close"], [class*="accept"], [class*="dismiss"]'); } catch(e) {}
+            await new Promise(r => setTimeout(r, 1000));
         }
 
         for (let pg = 1; pg <= config.maxPages; pg++) {
@@ -328,11 +333,12 @@ function transformVehicle(raw, dealer) {
 // ─── Merge Logic ─────────────────────────────────────────────
 
 function mergeInventory(scraped, existing) {
-    const existingMap = {};
-    existing.forEach(v => { existingMap[v.stockNumber || v.id] = v; });
-
     const merged = [];
     const seen = new Set();
+
+    // First, add all scraped vehicles (update existing if found)
+    const existingMap = {};
+    existing.forEach(v => { existingMap[v.stockNumber || v.id] = v; });
 
     scraped.forEach(vehicle => {
         const key = vehicle.stockNumber;
@@ -341,7 +347,6 @@ function mergeInventory(scraped, existing) {
 
         const prev = existingMap[key];
         if (prev) {
-            // Preserve user-set fields from existing data
             merged.push({
                 ...vehicle,
                 published: prev.published !== undefined ? prev.published : true,
@@ -352,6 +357,15 @@ function mergeInventory(scraped, existing) {
             });
         } else {
             merged.push(vehicle);
+        }
+    });
+
+    // Then, preserve ALL existing vehicles that weren't re-scraped
+    existing.forEach(v => {
+        const key = v.stockNumber || v.id;
+        if (!seen.has(key)) {
+            seen.add(key);
+            merged.push(v);
         }
     });
 
