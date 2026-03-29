@@ -301,6 +301,13 @@ body::before {
     color: var(--green);
 }
 
+.card-monthly-est {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    margin-bottom: 4px;
+}
+
 .card-meta {
     display: flex;
     flex-direction: row;

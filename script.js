@@ -8,7 +8,7 @@ let filters = {
     price: 'all',
     make: 'all',
     condition: 'all',
-    sort: 'price-asc'
+    sort: 'year-desc'
 };
 
 function debounce(fn, delay) {
@@ -135,7 +135,12 @@ function applyFilters() {
             });
             break;
         case 'year-desc':
-            filtered.sort((a, b) => b.year - a.year);
+            filtered.sort((a, b) => {
+                if (b.year !== a.year) return b.year - a.year;
+                const aPrice = a.price || 0;
+                const bPrice = b.price || 0;
+                return bPrice - aPrice;
+            });
             break;
         case 'miles-asc':
             filtered.sort((a, b) => (a.mileage || 0) - (b.mileage || 0));
@@ -175,12 +180,16 @@ function renderGrid(vehicles) {
             : '<div class="card-placeholder">🚗</div>';
 
         const conditionClass = v.condition === 'New' ? 'card-badge card-badge--new' : 'card-badge';
+        const monthlyPayment = v.price && v.price > 0
+            ? `<div class="card-monthly-est">Est. ~$${Math.round(v.price * 0.018).toLocaleString('en-US')}/mo</div>`
+            : '';
 
         card.innerHTML = `
             <div class="card-image">${imageHTML}</div>
             <div class="card-body">
                 <div class="card-title">${v.year} ${v.make} ${v.model} ${v.trim || ''}</div>
                 <div class="card-price">${formatPrice(v.price)}</div>
+                ${monthlyPayment}
                 <div class="card-meta">
                     <span class="${conditionClass}">${v.condition}</span>
                     <span class="card-badge">${v.body}</span>
