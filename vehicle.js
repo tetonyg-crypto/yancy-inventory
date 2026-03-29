@@ -113,11 +113,12 @@ function renderVehicle(v) {
 
     // Description
     let descHTML = '';
-    if (v.description) {
+    const descText = v.description_web || (v.description ? v.description.replace(/3_0_7-69-9\/3743/g, '(307) 699-3743') : '');
+    if (descText) {
         descHTML = `
             <div class="description-section">
                 <div class="section-label">About This Vehicle</div>
-                <p>${v.description}</p>
+                <p>${descText}</p>
             </div>
         `;
     }
