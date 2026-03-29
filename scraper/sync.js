@@ -43,7 +43,7 @@ const DEALERS = [
         needsHomepage: true
     },
     {
-        name: "Teton Motors GM",
+        name: "Stone's Auto Group GM",
         baseUrl: 'https://www.tetonmotorsgm.com',
         searchUrl: 'https://www.tetonmotorsgm.com/searchnew.aspx',
         platform: 'dealeron',
